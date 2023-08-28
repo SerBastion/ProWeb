@@ -1,7 +1,14 @@
 ## Modelo Caja
 
-# **Hola buenos días**
+El modelo de caja es un concepto fundamental en la construcción de páginas web utilizando HTML y CSS. Se refiere a cómo se representan y se organizan los elementos en una página web dentro de cajas rectangulares. Cada elemento en una página web se considera una "caja" que tiene propiedades como el ancho, el alto, los márgenes, los rellenos y el borde.
 
-|*Esto es una prueba*|
+En HTML y CSS, cada elemento se representa como una caja rectangular que consiste en las siguientes partes:
 
-Todo en CSS tiene una caja alrededor, y comprender estas cajas es clave para poder crear diseños con CSS o para alinear elementos con otros elementos. En este artículo, echaremos un vistazo más de cerca al modelo de cajas en CSS con el que vas a poder crear diseños de compaginación más complejos con una comprensión de cómo funciona y la terminología relacionada.
+|Elemento   |Descripción|  
+|:---------:|:----------|
+|Contenido  | Es el contenido real del elemento, como texto, imágenes u otros elementos anidados.
+|Relleno (padding)| Es un espacio transparente alrededor del contenido del elemento. Puedes ajustar el relleno para controlar la separación entre el contenido y el borde de la caja. |
+|Borde| Es una línea que rodea el contenido y el relleno de la caja. Puedes definir su estilo, grosor y color.|
+|Margen| Es un espacio transparente que rodea la caja en su totalidad. Controla la separación entre la caja y otros elementos circundantes.|
+
+La combinación de estas partes forma la "caja" que delimita visualmente cada elemento en una página web. Al comprender y controlar las propiedades de la caja, los diseñadores web pueden crear diseños precisos y consistentes.
