@@ -20,7 +20,7 @@ La propiedad CSS display controla cómo un elemento HTML se muestra en la págin
 
 **block:** Los elementos con esta propiedad ocupan todo el ancho disponible en su contenedor principal y generan una nueva línea antes y después de ellos. Ejemplos de elementos que son de tipo bloque son los encabezados ((h1), (h2), etc.), los párrafos ((p)), las divisiones ((div)), entre otros.
 
-**inline:** Los elementos con esta propiedad se comportan como si fueran parte del flujo de texto normal y solo ocupan el espacio necesario para su contenido. No generan nuevas líneas antes ni después de ellos. Ejemplos de elementos en línea son los enlaces ((a)), las imágenes ((img)), los énfasis ((em>) y los elementos de texto en general.
+**inline:** Los elementos con esta propiedad se comportan como si fueran parte del flujo de texto normal y solo ocupan el espacio necesario para su contenido. No generan nuevas líneas antes ni después de ellos. Ejemplos de elementos en línea son los enlaces ((a)), las imágenes ((img)), los énfasis ((em)) y los elementos de texto en general.
 
 **inline-block:** Esta opción combina las características de elementos en línea y elementos de bloque. Los elementos en línea-bloque se comportan como elementos en línea, pero permiten definir ancho, alto, márgenes y relleno, como lo harías con elementos de bloque. Esto es útil para crear diseños en línea con ciertas características de bloque.
 
