@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgb(226, 221, 221);
+}
+
+*{
+    color: black;
+}
+    
+.parrafo{
+    color: gray;
+    line-height: 1.5em;
+
+}
+#par1{
+    font-size: 20px;
+}
+
+h1{
+    font-size:100px;
+    margin-top: 50;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    
+}
+
+h2{
+    margin-top: 0;
+    color: rgb(60, 0, 255);
+    background-color: blanchedalmond;
+}
+
+
+    .justificado {
+        font-size:20px;
+        text-align: justify;
+        color: rgb(0, 0, 0);
+    }
+
+h3{
+    font-size:50px;
+    text-align: center;
+}
+
+#direccionales{
+    border: 5px dashed beige;
+    border-radius: 10%;
+    background-color: aqua;
+    width: 300px;
+}
+
+.referencias:hover{
+    text-decoration: underline;
+}
+
+.referencias{
+    text-decoration: none;
+}
+
+h4{
+
+    text-align:left;
+}
+
+h5{
+
+    background-color: blueviolet;
+}
+
+.centrarimagen{
+    text-align: center;
+}
+
+.contenedor {
+        display: flex; /* Utilizar flexbox para alinear elementos */
+        align-items: justify; /* Alinear verticalmente */
+    }
+    
+    .imagen {
+        margin-right: 20px; /* Agregar un margen a la derecha para separar imagen y texto */
+        object-fit: cover;
+        width: 300px; /* Ancho deseado de la imagen */
+        height: 300px; /* Altura deseada de la imagen */
+    }
+
+    .marco {
+        background-color: aliceblue;
+        border: 2px dotted black; /* Estilo de borde (ancho, tipo y color) */
+        padding: 10px; /* Espacio entre el contenido y el borde */
+    }
+
+ /* Definir la animación */
+ @keyframes desplazamiento-horizontal {
+        from { transform: translateX(10); }
+        to { transform: translateX(100px); }
+    }
+    
+    /* Aplicar la animación al texto */
+    .texto-animado {
+        animation: desplazamiento-horizontal 2s infinite alternate; /* Animación, duración, repetición */
+    }
