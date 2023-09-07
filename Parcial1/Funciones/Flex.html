@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+    
+        }
+
+        .contenedor{
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .caja{
+            width: 200px ;
+            height: 100px;
+            background-color: pink;
+            border: 1px solid red;
+            text-align: center;
+            font-size: 65px;
+        }
+
+        #caja1{
+            text-align: center;
+            align-self: flex-start;
+            font-size: 65px;
+            background-color: whitesmoke;
+            border: 3px solid grey;
+        }
+
+        #caja2{
+            align-self: flex-end;
+            text-align: center;
+            font-size: 65px;
+            background-color: rgb(247, 228, 52);
+            border: 3px solid grey;
+            
+        }
+
+        #caja3{
+            align-self: flex-end;
+            text-align: center;
+            font-size: 65px;
+            background-color: orange;
+            border: 3px solid red;
+        }
+
+        #caja1{flex-grow: 5;}
+        #caja2{flex-grow: 1 ;}
+        #caja3{flex-grow: 1;}
+        #caja4{flex-grow: 1;}
+
+        /*<div id="caja1" class="caja">Caja 5</div>
+        <div id="caja1" class="caja">Caja 6</div>
+        <div id="caja1" class="caja">Caja 7</div>
+        <div id="caja1" class="caja">Caja 8</div>
+        <div id="caja1" class="caja">Caja 9</div>
+        <div id="caja1" class="caja">Caja 10</div>*/
+        
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div id="caja1" class="caja">Nubes</div>
+        <div id="caja2" class="caja">Piso</div>
+        <div id="caja2" class="caja">Piso</div>
+        <div id="caja4" class="caja">Pared</div>
+        <div id="caja2" class="caja">Piso</div>
+        <div id="caja2" class="caja">Piso</div>
+        <div id="caja1" class="caja">Nubes</div>
+        <div id="caja3" class="caja">Lava</div>
+        <div id="caja4" class="caja">Planta baja</div>
+        <div id="caja3" class="caja">Lava</div>
+        
+    </div>
+    
+</body>
+</html>
