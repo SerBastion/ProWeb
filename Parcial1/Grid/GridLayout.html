@@ -18,29 +18,41 @@
         height: 100vh;
         background-color: blue;
         display: grid;
-        grid-template-columns: 200px 200px 200px;
-        grid-template-rows: 200px 200px 200px;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 40% 30% 30%;
         justify-content: center;
         justify-items: stretch;
-        align-items: center;
+
+        align-items: stretch;
+
+        grid-template-areas: 'enca col1'
+                             'col2 col1'
+                             'piet piet';
 
     }
 
     .caja{ 
-        height: 100px;
-        background-color: aqua;
-        border: 1px solid blue;
-        color: aliceblue;
+        /*height: 100px;*/
+        background-color: maroon;
+        border: 5px solid orange;
+        color: white;
+        font-size: 100px;
 
     }
 
     
 
-    #caja1{
+    /*#caja1{
         grid-column-start: 1;
         grid-column-end: 1;
         align-self:start;
-    }
+    }*/
+
+    #caja1{grid-area: enca;}
+    #caja2{grid-area: col1;}
+    #caja3{grid-area: col2;}
+    #caja4{grid-area: piet;}
+
 </style>
 
 </head>
@@ -50,11 +62,6 @@
         <div id="caja2" class="caja">caja 2</div>
         <div id="caja3" class="caja">caja 3</div>
         <div id="caja4" class="caja">caja 4</div>
-        <div id="caja5" class="caja">caja 5</div>
-        <div id="caja6" class="caja">caja 6</div>
-        <div id="caja6" class="caja">caja 7</div>
-        <div id="caja6" class="caja">caja 8</div>
-        <div id="caja6" class="caja">caja 9</div>
     </div>
     
 </body>
