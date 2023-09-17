@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            
+        }
+    
+        body{
+            width: 100vw;
+            height: 100vh;
+        }
+    
+        .cont{
+            
+            background-color: yellow;
+            color: blue;
+            border: 2px solid red;
+            height: 100%;
+            float: left;
+    
+        }
+    
+        #sidebar{
+            width: 30%;
+            float: left;
+        }
+    
+        #content{
+            left: 30%;
+            width: 70%;
+        }
+
+        #header{
+            width: 100%;
+            height: 10%;
+            clear: both;
+            float: right;
+        }
+
+        ul,ol{
+            font-size: 50px;
+            list-style: none;
+        }
+       
+        .lista:hover>ol {
+            font-size: 50px;
+            max-height: 100%; 
+            color: Red;
+            transition-delay: 0.1s;
+            opacity: 10;
+        }
+
+        .lista>ol {
+            color: black;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition-delay: 0s;
+            transition: max-height 1s ease-in-out, opacity 1s ease-in-out;
+            
+        }
+
+        
+        
+    </style>
+
+</head>
+
+
+<body>
+    <div class="cont" id="header">Header</div>
+    <div class="cont" id="sidebar">Sidebar
+        <ul>
+            <li class="lista">Banda
+                <ol class="sublista">
+                    <li >Historia</li>
+                    <li >Integrantes</li>
+                    <li >Discografia</li>
+                </ol>
+            </li>
+           
+            <li class="lista">Escuela
+                <ol>
+                    <li >Alumnos</li>
+                    <li >Maestros</li>
+                    <li >Coordinadores</li>
+                </ol>
+            </li>
+            <li class="lista">Parcial
+                <ol class="sublista">
+                    <li>Ponderación</li>
+                    <li >Fecha de exámenes</li>
+                    <li>Nivelaciones</li>
+                </ol>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="cont" id="content">Content</div>
+</body>
+
+
+</html>
+
