@@ -10,53 +10,14 @@
 
     <title>Document</title>
 
-    <style>
-
-
-        *{
-            box-sizing: border-box;
-            margin-right: 0;
-            padding: 0;
-            border: 50%;
-        }
-        p{
-            margin-top: 1px;
-        }
-
-        table{
-            width: 100%;
-            background-color: antiquewhite;
-        }
-
-        table, thead, tbody, tr, th, td {
-            border: 3px solid gray;
-            border-collapse: collapse;
-        }
-
-        
-
-        @media screen and (max-width: 600px){
-            table, thead, tbody, tr, th, td {
-                display: block;
-            }
-
-            thead{
-                display: block;
-            }
-
-            td{
-                padding-left: 50%;
-            }
-        }
-        
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
  
 
 <body>
 
-    <table>
+    <table class="table table-striped-columns">
         <thead>
             <tr>
                 <th>Información del Alumno</th>
@@ -86,8 +47,8 @@
     </table>
 <p>
 <p>
-    <table>
-        <thead>
+    <table class="table table-dark table-hover">
+        <thead class="table-dark">
             <tr>
                 <th>MATERIA/DOCENTE</th>
                 <th>CVE OFI</th>
