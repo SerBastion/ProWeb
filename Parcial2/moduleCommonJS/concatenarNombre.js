@@ -1,7 +1,5 @@
 let nombres=require("./Nombre.js");
-let nom=nombres.nombreCompleto("Sebastian")
+let nom=nombres.nombreCompleto("Sebastian","Garcia")
 
 
-let ape=nombres.nombreCompleto("Garcia")
-
-console.log(nom,ape);
+console.log(nom);
