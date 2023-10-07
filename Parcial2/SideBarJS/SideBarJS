@@ -58,8 +58,8 @@
         }
 
 
-        .contencidoAlCien{
-            width: 100% important;
+        .contenidoAlCien{
+            width: 100% !important;
         }
         
 
@@ -70,7 +70,7 @@
 
 <body>
     <div class="cont" id="header">Header</div>
-    <input id="toggle" type="checkbox">
+    
 
     <div class="cont" id="sidebar">Sidebar</div>
     <div class="cont" id="content">
@@ -82,10 +82,10 @@
     </div>
 
     <script>   
-        document.getElementyById("btn").addEventListener("click", function(){
+        document.getElementById("btn").addEventListener("click", function(){
             console.log("Click en el boton")
-            document.getElementById("Sidebar").classList.toggle("sideBarEscondido");
-            document.getAnimations("Content").classList.toggle("contencionAlCien");
+            document.getElementById("sidebar").classList.toggle("sideBarEscondido");
+            document.getElementById("content").classList.toggle("contenidoAlCien");
         })
     </script>
     
