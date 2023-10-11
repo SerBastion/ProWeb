@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<style>
-    *{
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
 
-    }
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+
+        }
 
 
-    .contenedor{
-        display: grid;
-        width: 100vw;
-        height: 100vh;
-        background-color: blue;
-        grid-template-columns: 200px 200px 200px;
-        grid-template-rows: 200px 200px 200px;
-        justify-content: center;
-        justify-items: stretch;
-        align-items:stretch;
+        .contenedor {
+            display: grid;
+            width: 100vw;
+            height: 100vh;
+            background-color: blue;
+            grid-template-columns: 200px 200px 200px;
+            grid-template-rows: 200px 200px 200px;
+            justify-content: center;
+            justify-items: stretch;
+            align-items: stretch;
 
-    }
+        }
 
-    .caja{ 
-        
-        background-color: aqua;
-        border: 1px solid blue;
-        color: aliceblue;
+        .caja {
 
-    }
+            background-color: aqua;
+            border: 1px solid blue;
+            color: aliceblue;
+            font-size: 100px;
+            text-align: center;
 
-    
+        }
 
-    #caja1{
-        grid-column-start: 1;
-        grid-column-end: 1;
-        /*align-self:start;*/
-    }
-</style>
+        #caja12{
+            grid-column-start: 1;
+            grid-column-end: 1;
+
+        }
+
+
+        #caja1 {
+            grid-column-start: 1;
+            grid-column-end: 1;
+            /*align-self:start;*/
+        }
+
+        h3 {
+            text-align: center;
+        }
+    </style>
 
 </head>
+
 <body>
-    <div class="contenedor">
+    <div id="cont" class="contenedor">
         <div id="caja1" class="caja"></div>
         <div id="caja2" class="caja"></div>
         <div id="caja3" class="caja"></div>
@@ -55,14 +71,22 @@
         <div id="caja7" class="caja"></div>
         <div id="caja8" class="caja"></div>
         <div id="caja9" class="caja"></div>
+        <div id="caja10" ></div>
 
-        <div id="" class="caja">
-            
+        <h3>
+        <div id="caja11">
+
+            <button id="btnLim" type="button">Limpiar</button>
+
         </div>
+
+        <div id="caja12" class="caja"></div>
+    </h3>
     </div>
 
     <script>
 
+        /*
         var xo="x"
         document.querySelector(".contenedor").addEventListener("click",function(e){
             document.getElementById(e.target.id);
@@ -77,12 +101,42 @@
         document.getElementById("btnLim").addEventListener("click", function(){
             let cajas = document.getElementByIdclassName("caja");
 
-            for (const elemento of caja){
-                console.log(elemento);
+            for (const elemento of cajas){
                 elemento.innerText="";
             }
         })
+        */
+ 
+        
+        $('document').ready(function () {
+            var xo="x";
+
+            $("#cont").click(function (e) {
+                if($(e.target).text()=="" ) {
+                    if(xo=="X") {xo="0"} else {xo="X"}
+                    $(e.target).text(xo)
+                }
+                
+                
+                
+            })
+
+            $("#btnLim").click(function(){
+                $(".caja").each(function(){
+                    console.log(this);
+                });
+            })
+        })
+        
+
+        
+        /*
+        console.log("click");
+        console.log(e);
+        console.log(e.target.id);
+        */
     </script>
-    
+
 </body>
+
 </html>
