@@ -85,63 +85,7 @@
     </div>
 
     <script>
-        var cat = document.createElement("img");
-        cat.src = "https://i.pinimg.com/564x/fb/52/17/fb5217263acaffdafc757b8b3e35efbd.jpg";
-        cat.style.width = "100%";
-        cat.style.height = "100%";
 
-        var rat = document.createElement("img");
-        rat.src = "https://2.bp.blogspot.com/-0st69Q6xF_4/UAOEhsHLIQI/AAAAAAAALb8/o8ojhZERPi8/s1600/Funny+Rat_.jpg";
-        rat.style.width = "100%";
-        rat.style.height = "100%";
-
-        var xo = cat;
-        var ganador = null;
-        var turno = "cat";
-        var tablero = ["", "", "", "", "", "", "", "", ""];
-
-        var cajas = document.querySelectorAll(".caja");
-
-        cajas.forEach(function (caja, index) {
-            caja.addEventListener("click", function () {
-                if (!ganador && !tablero[index]) {tablero[index] = turno;
-                    caja.appendChild(xo.cloneNode());
-                    ganador = verificarGanador();
-                    if (ganador) {mostrarJugadaGanadora(caja, ganador);} 
-                    else {turno = turno === "cat" ? "rat" : "cat"; xo = turno === "cat" ? cat : rat;}
-                }
-            });
-        });
-
-        document.getElementById("btnLim").addEventListener("click", function () {
-            cajas.forEach(function (caja) {
-                caja.innerHTML = "";
-            });
-            ganador = null;
-            turno = "cat";
-            xo = cat;
-            tablero = ["", "", "", "", "", "", "", "", ""];
-        });
-
-        function verificarGanador() {
-            var combinacionesGanadoras = [
-                [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],[1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]
-            ];
-
-            for (var combinacion of combinacionesGanadoras) {
-                var a = tablero[combinacion[0]];
-                var b = tablero[combinacion[1]];
-                var c = tablero[combinacion[2]];
-                if (a === b && b === c && a !== "") {
-                    return a;
-                }
-            }
-        }
-
-        
-
-
-        /*
         var xo="x"
         document.querySelector(".contenedor").addEventListener("click",function(e){
             document.getElementById(e.target.id);
