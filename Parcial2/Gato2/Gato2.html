@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+
+        }
+
+
+        .contenedor {
+            display: grid;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(218, 195, 16);
+            grid-template-columns: 200px 200px 200px;
+            grid-template-rows: 200px 200px 200px;
+            justify-content: center;
+            justify-items: stretch;
+            align-items: stretch;
+
+        }
+
+        .caja {
+
+            background-color: white;
+            border: 5px solid rgb(255, 0, 0);
+            color: aliceblue;
+            font-size: 100px;
+            text-align: center;
+
+        }
+
+        #caja12 {
+            grid-column-start: 1;
+            grid-column-end: 1;
+
+        }
+
+
+        #caja1 {
+            grid-column-start: 1;
+            grid-column-end: 1;
+            /*align-self:start;*/
+        }
+
+        h3 {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="cont" class="contenedor">
+        <div id="caja1" class="caja"></div>
+        <div id="caja2" class="caja"></div>
+        <div id="caja3" class="caja"></div>
+        <div id="caja4" class="caja"></div>
+        <div id="caja5" class="caja"></div>
+        <div id="caja6" class="caja"></div>
+        <div id="caja7" class="caja"></div>
+        <div id="caja8" class="caja"></div>
+        <div id="caja9" class="caja"></div>
+        <div id="caja10"></div>
+
+        <h3>
+            <div id="caja11">
+
+                <button id="btnLim" type="button">Limpiar</button>
+
+            </div>
+
+            <div id="caja12" class="caja"></div>
+        </h3>
+    </div>
+
+    <script>
+        var cat = document.createElement("img");
+        cat.src = "https://i.pinimg.com/564x/fb/52/17/fb5217263acaffdafc757b8b3e35efbd.jpg";
+        cat.style.width = "100%";
+        cat.style.height = "100%";
+
+        var rat = document.createElement("img");
+        rat.src = "https://2.bp.blogspot.com/-0st69Q6xF_4/UAOEhsHLIQI/AAAAAAAALb8/o8ojhZERPi8/s1600/Funny+Rat_.jpg";
+        rat.style.width = "100%";
+        rat.style.height = "100%";
+
+        var xo = cat;
+        var ganador = null;
+        var turno = "cat";
+        var tablero = ["", "", "", "", "", "", "", "", ""];
+
+        var cajas = document.querySelectorAll(".caja");
+
+        cajas.forEach(function (caja, index) {
+            caja.addEventListener("click", function () {
+                if (!ganador && !tablero[index]) {
+                    tablero[index] = turno;
+                    caja.appendChild(xo.cloneNode());
+                    ganador = verificarGanador();
+                    if (ganador) { mostrarJugadaGanadora(caja, ganador); }
+                    else { turno = turno === "cat" ? "rat" : "cat"; xo = turno === "cat" ? cat : rat; }
+                }
+            });
+        });
+
+        document.getElementById("btnLim").addEventListener("click", function () {
+            cajas.forEach(function (caja) {
+                caja.innerHTML = "";
+            });
+            ganador = null;
+            turno = "cat";
+            xo = cat;
+            tablero = ["", "", "", "", "", "", "", "", ""];
+        });
+
+        function verificarGanador() {
+            var combinacionesGanadoras = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (var combinacion of combinacionesGanadoras) {
+                var a = tablero[combinacion[0]];
+                var b = tablero[combinacion[1]];
+                var c = tablero[combinacion[2]];
+                if (a === b && b === c && a !== "") {
+                    return a;
+                }
+            }
+
+            if (tablero.includes("")) {
+                return null;
+            } else {
+                return "Empate";
+            }
+
+        }
+
+        function mostrarJugadaGanadora(cajaGanadora, ganador) {
+            var ganadorImg = ganador === "cat" ? cat : rat;
+            cajaGanadora.innerHTML = "";
+            cajaGanadora.appendChild(ganadorImg.cloneNode());
+            setTimeout(function () {
+                swal("¡El ganador es " + ganador + "!", "", "success").then((value) => {
+                    if (value) {
+                        reiniciarJuego();
+                    }
+                });
+            }, 500);
+        }
+    </script>
+
+    
+
+</body>
+
+</html>
