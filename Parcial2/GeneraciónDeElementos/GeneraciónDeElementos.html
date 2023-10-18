@@ -12,28 +12,97 @@
     <div id="contenedor">
 
         <script>
-            let encabezados = ['Nombre', 'ApellidoP', 'ApellidoM'];
-
-
+            let encabezados = ["MATERIA-DOCENTE", "CVE OFI", "GP.", "CR.","LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"];
             let datos = [{
-                nombre: "Sebastian",
-                apellidop: "Garcia",
-                apellidom: "Nieves"
+                MD: "PROGRAMACION WEB",
+                CVE: "AEB1055",
+                GP: "05A",
+                CR: "5.0",
+                LUN: "07:00-08:00 A1S7",
+                MAR: "07:00-08:00 A1S7",
+                MIE: "07:00-08:00 A1S7",
+                JUE: "07:00-08:00 A1S7",
+                VIE: "07:00-08:00 A1S7",
 
             }, {
+                MD: "FUNDAMENTOS DE TELECOMUNICACIONES",
+                CVE: "AEC1034",
+                GP: "05A",
+                CR: "4.0",
+                LUN: "12:00-14:00 A1S5",
+                MAR: "",
+                MIE: "12:00-14:00 H306",
+                JUE: "",
+                VIE: "",
 
-                nombre: "Sebastian",
-                apellidop: "Garcia",
-                apellidom: "Nieves"
+            },
+            {
+                MD: "SISTEMAS OPERATIVOS",
+                CVE: "AEC1061",
+                GP: "05A",
+                CR: "5.0",
+                LUN: "",
+                MAR: "08:00-10:00 H306",
+                MIE: "",
+                JUE: "08:00-10:00 H306",
+                VIE: "",
+
             }, {
+                MD: "TALLER DE BASE DE DATOS",
+                CVE: "SCA1025",
+                GP: "05A",
+                CR: "4.0",
+                LUN: "14:00-15:00 A1S7",
+                MAR: "14:00-15:00 A1S7",
+                MIE: "14:00-15:00 A1S7",
+                JUE: "14:00-15:00 A1S7",
+                VIE: "",
 
-                nombre: "Sebastian",
-                apellidop: "Garcia",
-                apellidom: "Nieves"
-            }];
+            }, {
+                MD: "PROGRAMACION WEB GERARDO PINEDA ZAPATA",
+                CVE: "AEB1055",
+                GP: "05A",
+                CR: "5.0",
+                LUN: " 07:00-08:00 A1S7",
+                MAR: "07:00-08:00 A1S7",
+                MIE: "07:00-08:00 A1S7",
+                JUE: "07:00-08:00 A1S7",
+                VIE: "07:00-08:00 A1S7",
 
+            }, {
+                MD: "PROGRAMACION WEB GERARDO PINEDA ZAPATA",
+                CVE: "AEB1055",
+                GP: "05A",
+                CR: "5.0",
+                LUN: " 07:00-08:00 A1S7",
+                MAR: "07:00-08:00 A1S7",
+                MIE: "07:00-08:00 A1S7",
+                JUE: "07:00-08:00 A1S7",
+                VIE: "07:00-08:00 A1S7",
 
+            }, {
+                MD: "PROGRAMACION WEB GERARDO PINEDA ZAPATA",
+                CVE: "AEB1055",
+                GP: "05A",
+                CR: "5.0",
+                LUN: " 07:00-08:00 A1S7",
+                MAR: "07:00-08:00 A1S7",
+                MIE: "07:00-08:00 A1S7",
+                JUE: "07:00-08:00 A1S7",
+                VIE: "07:00-08:00 A1S7",
 
+            }, {
+                MD: "PROGRAMACION WEB GERARDO PINEDA ZAPATA",
+                CVE: "AEB1055",
+                GP: "05A",
+                CR: "5.0",
+                LUN: " 07:00-08:00 A1S7",
+                MAR: "07:00-08:00 A1S7",
+                MIE: "07:00-08:00 A1S7",
+                JUE: "07:00-08:00 A1S7",
+                VIE: "07:00-08:00 A1S7",
+
+            }]
 
             let tab = document.createElement("table");
             let enc = document.createElement("thead");
@@ -43,7 +112,8 @@
                 let th = document.createElement("th");
                 th.innerText = elemento;
                 fil.appendChild(th);
-            });
+
+            })
 
             enc.appendChild(fil);
             tab.appendChild(enc);
@@ -51,27 +121,82 @@
             tbody = document.createElement("tbody");
 
             datos.forEach(function (elemento) {
-
                 let fila = document.createElement("tr");
 
                 let td1 = document.createElement("td");
-                td1.innerText = elemento.nombre;
+                td1.innerText = elemento.MD;
                 fila.appendChild(td1);
 
                 let td2 = document.createElement("td");
-                td2.innerText = elemento.apellidop;
+                td2.innerText = elemento.CVE;
                 fila.appendChild(td2);
 
                 let td3 = document.createElement("td");
-                td3.innerText = elemento.apellidom;
+                td3.innerText = elemento.GP;
                 fila.appendChild(td3);
+
+                let td4 = document.createElement("td");
+                td4.innerText = elemento.CR;
+                fila.appendChild(td4);
+
+                let td5 = document.createElement("td");
+                td5.innerText = elemento.LUN;
+                fila.appendChild(td5);
+
+                let td6 = document.createElement("td");
+                td6.innerText = elemento.MAR;
+                fila.appendChild(td6);
+
+                let td7 = document.createElement("td");
+                td7.innerText = elemento.MIE;
+                fila.appendChild(td7);
+
+                let td8 = document.createElement("td");
+                td8.innerText = elemento.JUE;
+                fila.appendChild(td8);
+
+                let td9 = document.createElement("td");
+                td9.innerText = elemento.VIE;
+                fila.appendChild(td9);
+
+
                 tbody.appendChild(fila);
+
             })
 
             tab.appendChild(tbody);
 
-
             document.getElementById("contenedor").appendChild(tab);
+
+
+            // Obtengo la tabla
+            let tabla = document.querySelector("table");
+
+            // estilos para la tabla
+            tabla.style.border = "1px solid #000";
+            tabla.style.borderCollapse = "collapse";
+            tabla.style.width = "100%";
+
+            // as celdas de datos en la tabla (ignorando el encabezado)
+            let celdas = document.querySelectorAll("table tbody td");
+
+            // estilos para las celdas
+            celdas.forEach(function (celda) {
+                celda.style.padding = "8px";
+                celda.style.border = "1px solid #000";
+                celda.style.textAlign = "center";
+            });
+
+            // estilos adicionales para encabezado
+            let encabezado = document.querySelector("table thead");
+            encabezado.style.backgroundColor = "#333";
+            encabezado.style.color = "#fff";
+            encabezado.style.fontWeight = "bold";
+
+
+
+
+
         </script>
     </div>
 </body>
