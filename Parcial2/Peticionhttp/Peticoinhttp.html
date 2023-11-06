@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejemplo de petición a The Cat API</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        #imagenGato {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <button id="btnXml">Petición XMLHttpRequest</button>
+    <button id="btnFetch">Petición fetch</button>
+    <button id="btnAsync">Petición async</button>
+    <button id="btnAX">Petición AX</button>
+    <button id="btnJQ">Petición JQ</button>
+    <div id="gatoContainer">
+        <img id="imagenGato" src="" alt="Gato">
+    </div>
+ 
+    <script>
+        window.onload = function() {
+            /* BTN XML */
+            // Agrega un evento click al botón "Obtener Imagen de Gato"
+            document.getElementById("btnXml").addEventListener("click", () => {
+                const xhr = new XMLHttpRequest(); // Crea una instancia de XMLHttpRequest
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === this.DONE) { // Verifica si la solicitud está completa
+                        if (this.status === 200) { // Verifica si la respuesta es exitosa (código de estado 200)
+                            const imagenGato = document.getElementById("imagenGato"); // Obtiene el elemento de imagen
+                            const responseData = JSON.parse(this.responseText); // Analiza la respuesta JSON
+                            const imageUrl = responseData[0].url; // Extrae la URL de la imagen del gato
+                            imagenGato.src = imageUrl; // Asigna la URL de la imagen al atributo src del elemento de imagen
+                            imagenGato.style.display = "block"; // Muestra la imagen
+                        } else {
+                            console.error('Error en la solicitud. Código de estado: ' + this.status); // En caso de error, muestra un mensaje de error en la consola
+                        }
+                    }
+                });
+                xhr.open("GET", "https://api.thecatapi.com/v1/images/search"); // Abre una solicitud GET a la API de The Cat API
+                xhr.send(); // Envía la solicitud
+            });
+ 
+            /* BTN FETCH */
+            document.getElementById("btnFetch").addEventListener("click", () => {
+            // Realizamos una solicitud a la API de The Cat API usando fetch
+            fetch("https://api.thecatapi.com/v1/images/search")
+                .then(response => response.json()) // Convertimos la respuesta en formato JSON
+                .then(data => {
+                    // Obtenemos el elemento de imagen y la URL de la imagen de la respuesta
+                    const imagenGato = document.getElementById("imagenGato");
+                    const imageUrl = data[0].url;
+ 
+                    // Asignamos la URL de la imagen al atributo "src" de la imagen
+                    imagenGato.src = imageUrl;
+ 
+                    // Mostramos la imagen en la página estableciendo "display" en "block"
+                    imagenGato.style.display = "block";
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud: ' + error);
+                });
+            });
+ 
+            /*BTN ASYNC*/
+            document.getElementById("btnAsync").addEventListener("click", async () => {
+                try {
+                    // Realizamos una solicitud a la API de The Cat API utilizando fetch
+                    const objRespuesta = await fetch("https://api.thecatapi.com/v1/images/search");
+ 
+                    // Esperamos a que se complete la solicitud y convertimos la respuesta en formato JSON
+                    const datoJson = await objRespuesta.json();
+ 
+                    // Obtenemos el elemento de imagen y la URL de la imagen de la respuesta JSON
+                    const imagenGato = document.getElementById("imagenGato");
+                    const imageUrl = datoJson[0].url;
+ 
+                    // Asignamos la URL de la imagen al atributo "src" de la imagen
+                    imagenGato.src = imageUrl;
+ 
+                    // Mostramos la imagen en la página estableciendo "display" en "block"
+                    imagenGato.style.display = "block";
+                } catch (error) {
+                    // En caso de error, mostramos un mensaje de error en la consola
+                    console.error('Error en la solicitud: ' + error);
+                }
+                 });
+ 
+            /* BTN AX */
+            document.getElementById("btnAX").addEventListener("click", () => {
+                // Usamos Axios para realizar una solicitud GET a la API de The Cat API
+                axios({
+                    method: 'get',
+                    url: 'https://api.thecatapi.com/v1/images/search',
+                    responseType: 'json'
+                })
+                .then(function (response) {
+                    // Cuando la solicitud se completa con éxito, obtenemos la respuesta en "response"
+                    const imagenGato = document.getElementById("imagenGato");
+                    // Extraemos la URL de la imagen de gato de la respuesta
+                    const imageUrl = response.data[0].url;
+                    // Asignamos la URL de la imagen al atributo "src" de la imagen
+                    imagenGato.src = imageUrl;
+                    // Mostramos la imagen en la página estableciendo "display" en "block"
+                    imagenGato.style.display = "block";
+                })
+                .catch(function (error) {
+                    // En caso de error, mostramos un mensaje de error en la consola
+                    console.error('Error en la solicitud: ' + error);
+                });
+            });
+        }
+ 
+        /* btn JQ */
+        // Agregamos un evento al documento cuando está listo
+        $(document).ready(function () {
+            // Agregamos un evento de clic al botón "Obtener Imagen de Gato (jQuery)"
+            $("#btnJQ").click(function () {
+                // Realizamos una solicitud GET a la API de The Cat API utilizando jQuery
+                $.getJSON("https://api.thecatapi.com/v1/images/search", function (datoJson) {
+                    // Cuando la solicitud se completa con éxito, obtenemos la respuesta en "datoJson"
+                    const imagenGato = document.getElementById("imagenGato");
+                    // Extraemos la URL de la imagen de gato de la respuesta
+                    const imageUrl = datoJson[0].url;
+                    // Asignamos la URL de la imagen al atributo "src" de la imagen
+                    imagenGato.src = imageUrl;
+                    // Mostramos la imagen en la página estableciendo "display" en "block"
+                    imagenGato.style.display = "block";
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+ 
