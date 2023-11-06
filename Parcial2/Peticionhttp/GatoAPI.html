@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejemplo de petición a The Cat API</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+ 
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+ 
+        #gatoContainer S{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+ 
+        #imagenGato {
+            width:500px;
+            height: 500px;
+            display: none;
+        }
+ 
+    </style>
+</head>
+ 
+<body>
+    <button id="btnXml">Petición XMLHttpRequest</button>
+    <button id="btnFetch">Petición fetch</button>
+    <button id="btnAsync">Petición async</button>
+    <button id="btnAX">Petición AX</button>
+    <button id="btnJQ">Petición JQ</button>
+    <div id="gatoContainer">
+        <img id="imagenGato" src="" alt="Gato">
+    </div>
+ 
+    <script>
+        window.onload = function() {
+            /* BTN XML */
+            document.getElementById("btnXml").addEventListener("click", () => {
+                const xhr = new XMLHttpRequest();
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === this.DONE) {
+                        if (this.status === 200) {
+                            const imagenGato = document.getElementById("imagenGato");
+                            const responseData = JSON.parse(this.responseText);
+                            const imageUrl = responseData[0].url;
+                            imagenGato.src = imageUrl;
+                            imagenGato.style.display = "block";
+                        } else {
+                            console.error('Error en la solicitud. Código de estado: ' + this.status);
+                        }
+                    }
+                });
+                xhr.open("GET", "https://api.thecatapi.com/v1/images/search");
+                xhr.send();
+            });
+            /* BTN FETCH */
+            document.getElementById("btnFetch").addEventListener("click", () => {
+            fetch("https://api.thecatapi.com/v1/images/search")
+                .then(response => response.json())
+                .then(data => {
+                    const imagenGato = document.getElementById("imagenGato");
+                    const imageUrl = data[0].url;
+                    imagenGato.src = imageUrl;
+                    imagenGato.style.display = "block";
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud: ' + error);
+                });
+            });
+ 
+            /*BTN ASYNC*/
+            document.getElementById("btnAsync").addEventListener("click", async () => {
+                try {
+                    const objRespuesta = await fetch("https://api.thecatapi.com/v1/images/search");
+                    const datoJson = await objRespuesta.json();
+                    const imagenGato = document.getElementById("imagenGato");
+                    const imageUrl = datoJson[0].url;
+                    imagenGato.src = imageUrl;
+                    imagenGato.style.display = "block";
+                } catch (error) {
+                    console.error('Error en la solicitud: ' + error);
+                }
+            });
+ 
+            /* BTN AX */
+            document.getElementById("btnAX").addEventListener("click", () => {
+             axios({
+                 method: 'get',
+                 url: 'https://api.thecatapi.com/v1/images/search',
+                 responseType: 'json'
+                })
+                    .then(function (response) {
+                        const imagenGato = document.getElementById("imagenGato");
+                        const imageUrl = response.data[0].url;
+                        imagenGato.src = imageUrl;
+                        imagenGato.style.display = "block";
+                    })
+                        .catch(function (error) {
+                        console.error('Error en la solicitud: ' + error);
+                    });
+            });
+ 
+        }
+ 
+        /* btn JQ */
+       
+        $(document).ready(function () {
+            $("#btnJQ").click(function () {
+                $.getJSON("https://api.thecatapi.com/v1/images/search", function (datoJson) {
+                    const imagenGato = document.getElementById("imagenGato");
+                    const imageUrl = datoJson[0].url;
+                    imagenGato.src = imageUrl;
+                    imagenGato.style.display = "block";
+                });
+            });
+        });
+ 
+    </script>
+</body>
+</html>
+ 
+ 
