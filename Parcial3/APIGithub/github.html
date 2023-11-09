@@ -1,35 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Repositorios de GitHub</title>
     <style>
-         .cont {
-        background-color: paleturquoise;
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f7ecd4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cont {
+            background-color: #ffe1e1;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #4b6cb7;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fcf5e1;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        script {
+            display: none; /* Se oculta el script*/
         }
     </style>
 </head>
 <body class="cont">
     <h1>Lista de Repositorios de GitHub</h1>
-    <div class="rounded bg-info text-white p-2 container text-center" style="max-width: 200px;">
-    <ul id="repos-list"></ul>
-.   </div>
-    </ul>
+    <div class="rounded bg-info text-white p-2 container text-center">
+        <ul id="repos-list"></ul>
+    </div>
+
     <script>
         const username = "SerBastion"; 
-        const token = "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"; 
+        const token = "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"; 
 
         const reposList = document.getElementById("repos-list");
 
-     
         const headers = new Headers({
             "Authorization": `token ${token}`
         });
 
-        
         fetch(`https://api.github.com/users/${username}/repos`, { headers })
             .then((response) => response.json())
             .then((repos) => {
-               
                 repos.forEach((repo) => {
                     const li = document.createElement("li");
                     li.textContent = repo.name;
