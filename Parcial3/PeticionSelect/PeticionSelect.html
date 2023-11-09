@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stand-Up Comedy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('https://www.elcorteingles.es/entradas/blog/wp-content/uploads/2020/11/Partes-de-un-escenario.jpg');  /* Reemplaza 'URL_DE_TU_IMAGEN' con la URL de tu imagen de fondo */
+            background-color: #000;
+            color: #fff;
+        }
+
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #categorias, #peticion {
+            margin: 10px;
+        }
+
+        #peticion {
+            background-color: #ff5733; /* Color de contraste para el botón */
+            border: 2px solid #ff5733; /* Borde del botón */
+            border-radius: 20px; /* Mayor redondez en el botón */
+            padding: 15px 30px; /* Mayor tamaño del botón */
+        }
+
+        #chiste {
+            font-size: 20px;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: #ff5733; /* Color de contraste para el texto del chiste */
+        }
+    </style>
+</head>
+<body>
+    <h1>Stand-Up Comedy</h1>
+    <select id="categorias"></select>
+
+    <button id="peticion">🎤 ¡Cuéntame un chiste! 🎤</button>
+    <div id="chiste"></div>
+
+    <script>
+        window.onload = function () {
+            fetch("https://api.chucknorris.io/jokes/categories")
+                .then(respuesta => respuesta.json())
+                .then(function (dato) {
+                    dato.forEach(elemento => {
+                        console.log(elemento);
+                        let opc = document.createElement("option");
+                        opc.value = elemento;
+                        opc.innerText = elemento;
+                        document.getElementById("categorias").appendChild(opc);
+                    });
+                });
+
+            document.getElementById("peticion").addEventListener("click", function () {
+                const categoriaSeleccionada = document.getElementById("categorias").value;
+                fetch(`https://api.chucknorris.io/jokes/random?category=${categoriaSeleccionada}`)
+                    .then(respuesta => respuesta.json())
+                    .then(function (dato) {
+                        document.getElementById("chiste").innerText = dato.value;
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
