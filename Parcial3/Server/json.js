@@ -3,7 +3,7 @@ const express = require ('express');
 const app = express();
 
 app.get('/',(req,res)=>{
-    console.log(req,query);
+    //console.log(req,query);
     res.json({mensaje: 'Server Express resopndiente a get'})
 
 
@@ -15,15 +15,15 @@ app.post('/',(req,res)=>{
 
 })
 
-app.delete('/clientes',(req,res)=>{
-    res.json({mensaje: 'Server Express resopndiente a delte'})
+app.delete('/',(req,res)=>{
+    res.json({mensaje: 'Server Express resopndiente a delite'})
 
 
 })
 
 
-app.lsiten('8882',(req,res)=>{
-    res.json({mensaje: 'Server Express corriendo en puerto 8882'})
+app.listen('8082',(req,res)=>{
+    console.log("Server Express corriendo en puerto 8082")
 
     
 })
