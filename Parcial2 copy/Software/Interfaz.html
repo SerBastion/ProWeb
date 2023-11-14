@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Caja del Restaurante</title>
+    <style>
+        /* Estilos para la interfaz de la caja del restaurante */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .columna-izquierda, .columna-centro, .columna-derecha {
+            width: 30%;
+            padding: 10px;
+        }
+
+        .seccion {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            margin: 10px 0;
+        }
+
+        .seccion-1[contenteditable="true"] {
+            background-color: white;
+        }
+
+        .categoria-btn, .producto-btn, .cupon-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 5px; /* Ancho reducido */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 0;
+            display: block;
+            width: 100%;
+        }
+
+        .section-6 .btn-insertar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 5px; /* Ancho reducido */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 0;
+            display: block;
+            width: 100%;
+        }
+
+        .section-7 .btn-pagar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 5px; /* Ancho reducido */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 0;
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="columna-izquierda">
+            <div class="seccion seccion-1" contenteditable="true">
+                <!-- 1era sección: Pedidos de los clientes -->
+            </div>
+            <div class="seccion seccion-2">
+                <!-- 2da sección: Total, Subtotal y Cambio -->
+            </div>
+        </div>
+        <div class="columna-centro">
+            <div class="seccion seccion-3">
+                <!-- 3ra sección: Botones de categorías -->
+                <button class="categoria-btn">Hamburguesas</button>
+                <button class="categoria-btn">Bebidas</button>
+                <button class= "categoria-btn">Snacks</button>
+                <button class="categoria-btn">Combos</button>
+            </div>
+            <div class="seccion seccion-4">
+                <!-- 4ta sección: Botones específicos de categoría -->
+                <!-- Botones de productos -->
+                <button class="producto-btn">Carne</button>
+                <button class="producto-btn">Doble</button>
+                <button class="producto-btn">Jr. Carne</button>
+                <button class="producto-btn">Jr. Pollo</button>
+                <button class="producto-btn">Vegetariana</button>
+            </div>
+            <div class="seccion seccion-5">
+                <!-- 5ta sección: Botón de "Cupones promoción" -->
+                <button class="cupon-btn">Cupones Promoción</button>
+            </div>
+        </div>
+        <div class="columna-derecha">
+            <div class="seccion seccion-6">
+                <!-- 6ta sección: Botones en la parte superior derecha -->
+                <button class="btn-insertar">Agregar Artículo</button>
+            </div>
+            <div class="seccion seccion-7">
+                <!-- 7ma sección: Botón "Pagar ahora" -->
+                <button class="btn-pagar">Pagar ahora</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
