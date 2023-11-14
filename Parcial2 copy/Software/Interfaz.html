@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caja del Restaurante</title>
     <style>
-        /* Estilos para la interfaz de la caja del restaurante */
         body {
             font-family: Arial, sans-serif;
         }
@@ -13,8 +14,8 @@
             justify-content: space-around;
         }
 
-        .columna-izquierda, .columna-centro, .columna-derecha {
-            width: 30%;
+        .izquierda, .derecha {
+            width: 48%;
             padding: 10px;
         }
 
@@ -32,7 +33,34 @@
         .categoria-btn, .producto-btn, .cupon-btn {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 5px; /* Ancho reducido */
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 0;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* Estilos para los botones de categoría "Hamburguesas" */
+        .categoria-btn.hamburguesas {
+            background-color: rgb(0, 149, 149); /* Cambia el color a azul claro */
+        }
+
+        /* Estilos para los botones de categoría que no sean "Hamburguesas" */
+        .categoria-btn:not(.hamburguesas) {
+            background-color: hsl(122, 39%, 49%);
+            color: white;
+        }
+
+        .cupon-btn {
+            background-color: orange; /* Cambia el color a naranja */
+        }
+
+        .btn-insertar, .btn-pagar {
+            background-color: #D2B48C; /* Cambia el color a café claro */
+            color: white;
+            padding: 10px 5px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -41,73 +69,187 @@
             width: 100%;
         }
 
-        .section-6 .btn-insertar {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 5px; /* Ancho reducido */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px 0;
-            display: block;
-            width: 100%;
+        .texto-pedido {
+            /* Estilos para el recuadro de texto del pedido */
+            max-height: 200px;
+            overflow-y: auto;
         }
 
-        .section-7 .btn-pagar {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 5px; /* Ancho reducido */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px 0;
-            display: block;
-            width: 100%;
+        .total-subtotal-cambio {
+            /* Estilos para el recuadro de Total, Subtotal y Cambio */
+        }
+
+        .producto-seleccionado {
+            background-color: blue !important;
+        }
+
+        .opciones-btn {
+            width: 48%;
         }
     </style>
 </head>
 <body>
     <div class="contenedor">
-        <div class="columna-izquierda">
-            <div class="seccion seccion-1" contenteditable="true">
-                <!-- 1era sección: Pedidos de los clientes -->
+        <div class="izquierda">
+            <div class="seccion total-subtotal-cambio">
+                <!-- Aquí se irán calculando el Total, Subtotal y Cambio -->
+                Total: $<span id="total">0</span> | Subtotal: $<span id="subtotal">0</span> | Cambio: $<span id="cambio">0</span>
             </div>
-            <div class="seccion seccion-2">
-                <!-- 2da sección: Total, Subtotal y Cambio -->
+            <div class="seccion seccion-1" contenteditable="true">
+                <div class="texto-pedido" id="pedido">
+                    <!-- Aquí aparecerán los pedidos del cliente -->
+                </div>
             </div>
         </div>
-        <div class="columna-centro">
+        <div class="derecha">
             <div class="seccion seccion-3">
-                <!-- 3ra sección: Botones de categorías -->
-                <button class="categoria-btn">Hamburguesas</button>
-                <button class="categoria-btn">Bebidas</button>
-                <button class= "categoria-btn">Snacks</button>
-                <button class="categoria-btn">Combos</button>
+                <!-- Botones de categorías -->
+                <button class="categoria-btn hamburguesas" onclick="seleccionarCategoria('Hamburguesas')">Hamburguesas</button>
+                <button class="categoria-btn" onclick="seleccionarCategoria('Bebidas')">Bebidas</button>
+                <button class="categoria-btn" onclick="seleccionarCategoria('Snacks')">Snacks</button>
+                <button class="categoria-btn" onclick="seleccionarCategoria('Combos')">Combos</button>
             </div>
             <div class="seccion seccion-4">
-                <!-- 4ta sección: Botones específicos de categoría -->
+                <!-- Botones específicos de categoría -->
                 <!-- Botones de productos -->
-                <button class="producto-btn">Carne</button>
-                <button class="producto-btn">Doble</button>
-                <button class="producto-btn">Jr. Carne</button>
-                <button class="producto-btn">Jr. Pollo</button>
-                <button class="producto-btn">Vegetariana</button>
             </div>
             <div class="seccion seccion-5">
-                <!-- 5ta sección: Botón de "Cupones promoción" -->
+                <!-- Botón de "Cupones promoción" -->
                 <button class="cupon-btn">Cupones Promoción</button>
             </div>
-        </div>
-        <div class="columna-derecha">
-            <div class="seccion seccion-6">
-                <!-- 6ta sección: Botones en la parte superior derecha -->
-                <button class="btn-insertar">Agregar Artículo</button>
-            </div>
-            <div class="seccion seccion-7">
-                <!-- 7ma sección: Botón "Pagar ahora" -->
+            <div class="seccion botones">
+                <!-- Botones en la parte inferior derecha -->
+                <button class="btn-insertar" onclick="agregarArticulo()">Agregar Artículo</button>
                 <button class="btn-pagar">Pagar ahora</button>
             </div>
         </div>
     </div>
+
+    <script>
+        let ordenActual = ''; // Variable para mantener el estado actual de la orden
+        let total = 0; // Variable para mantener el total de la orden
+        let subtotal = 0; // Variable para mantener el subtotal de la orden
+
+        function seleccionarCategoria(categoria) {
+            // Limpiar la sección de botones específicos
+            const botonesEspecificos = document.querySelector('.seccion-4');
+            botonesEspecificos.innerHTML = '';
+
+            // Mostrar los botones específicos según la categoría
+            if (categoria === "Hamburguesas") {
+                const botonesHamburguesas = ["Carne", "Doble", "Jr. Carne", "Jr. Pollo", "Vegetariana"];
+                botonesHamburguesas.forEach((boton) => {
+                    const btn = document.createElement("button");
+                    btn.className = "producto-btn hamburguesas";
+                    btn.textContent = boton;
+                    btn.onclick = () => seleccionarProducto(boton);
+                    botonesEspecificos.appendChild(btn);
+                });
+            } else {
+                // Agregar lógica para otras categorías si es necesario
+            }
+        }
+
+        function seleccionarProducto(producto) {
+            // Actualizar el estado actual de la orden con el producto seleccionado
+            ordenActual = `1x Hamburguesas de ${producto}`;
+
+            // Cambiar el color del botón seleccionado a azul
+            const botonesProductos = document.querySelectorAll('.producto-btn');
+            botonesProductos.forEach((btn) => {
+                btn.classList.remove('producto-seleccionado');
+            });
+
+            const botonSeleccionado = Array.from(botonesProductos).find((btn) => btn.textContent === producto);
+            if (botonSeleccionado) {
+                botonSeleccionado.classList.add('producto-seleccionado');
+            }
+
+            // Agregar lógica para cambiar los botones según el producto seleccionado
+            const botonesEspecificos = document.querySelector('.seccion-4');
+            botonesEspecificos.innerHTML = '';
+
+            if (producto === "Carne" || producto === "Doble" || producto === "Jr. Carne" || producto === "Jr. Pollo" || producto === "Vegetariana") {
+                const botonesSencillaDoble = ["Sencilla", "Doble"];
+                botonesSencillaDoble.forEach((btn) => {
+                    const nuevoBtn = document.createElement("button");
+                    nuevoBtn.className = "producto-btn hamburguesas";
+                    nuevoBtn.textContent = btn;
+                    nuevoBtn.onclick = () => seleccionarTipo(btn);
+                    botonesEspecificos.appendChild(nuevoBtn);
+                });
+            }
+        }
+
+        function seleccionarTipo(tipo) {
+            // Actualizar el estado actual de la orden con el tipo seleccionado
+            ordenActual += ` ${tipo}`;
+
+            // Cambiar el color del botón seleccionado a azul
+            const botonesTipos = document.querySelectorAll('.producto-btn');
+            botonesTipos.forEach((btn) => {
+                btn.classList.remove('producto-seleccionado');
+            });
+
+            const botonSeleccionado = Array.from(botonesTipos).find((btn) => btn.textContent === tipo);
+            if (botonSeleccionado) {
+                botonSeleccionado.classList.add('producto-seleccionado');
+            }
+
+            // Agregar lógica para cambiar los botones según el tipo seleccionado
+            const botonesEspecificos = document.querySelector('.seccion-4');
+            botonesEspecificos.innerHTML = '';
+
+            if (tipo === "Sencilla" || tipo === "Doble") {
+                const botonesNormalCombo = ["Normal", "Combo"];
+                botonesNormalCombo.forEach((btn) => {
+                    const nuevoBtn = document.createElement("button");
+                    nuevoBtn.className = "producto-btn hamburguesas";
+                    nuevoBtn.textContent = btn;
+                    nuevoBtn.onclick = () => seleccionarOpcion(btn);
+                    botonesEspecificos.appendChild(nuevoBtn);
+                });
+            }
+        }
+
+        function seleccionarOpcion(opcion) {
+            // Actualizar el estado actual de la orden con la opción seleccionada
+            ordenActual += ` en ${opcion}`;
+
+            // Cambiar el color del botón seleccionado a azul
+            const botonesOpciones = document.querySelectorAll('.producto-btn');
+            botonesOpciones.forEach((btn) => {
+                btn.classList.remove('producto-seleccionado');
+            });
+
+            const botonSeleccionado = Array.from(botonesOpciones).find((btn) => btn.textContent === opcion);
+            if (botonSeleccionado) {
+                botonSeleccionado.classList.add('producto-seleccionado');
+            }
+
+            // Agregar lógica para otras acciones si es necesario
+
+            // Mostrar la orden actual en la sección-1
+            const seccionPedido = document.querySelector('#pedido');
+            seccionPedido.innerHTML += `<p>${ordenActual}</p>`;
+
+            // Calcular el Total (simplemente sumando 1 por ahora)
+            subtotal += 1;
+            total = subtotal; // En este ejemplo, total es igual al subtotal
+            // Actualizar el total y subtotal en la sección correspondiente
+            const totalElement = document.querySelector('#total');
+            const subtotalElement = document.querySelector('#subtotal');
+            totalElement.textContent = total;
+            subtotalElement.textContent = subtotal;
+
+            // Limpiar la variable de ordenActual para permitir agregar nuevos artículos
+            ordenActual = '';
+        }
+
+        function agregarArticulo() {
+            // Agregar lógica para manejar la acción de agregar un artículo
+            // Puedes implementar más funcionalidades aquí según sea necesario
+        }
+    </script>
 </body>
 </html>
