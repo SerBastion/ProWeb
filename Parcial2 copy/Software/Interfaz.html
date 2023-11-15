@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,63 +15,65 @@
             justify-content: space-around;
         }
 
-        .izquierda, .derecha {
-            width: 48%;
+        .izquierda,
+        .derecha {
+            width: 50%;
             padding: 10px;
         }
 
         .seccion {
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
             margin: 10px 0;
+            border: none;
+            background-color: transparent;
         }
 
         .seccion-1[contenteditable="true"] {
             background-color: white;
         }
 
-        .categoria-btn, .producto-btn, .cupon-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 5px;
+        .categoria-btn,
+        .producto-btn,
+        .cupon-btn,
+        .btn-insertar,
+        .btn-pagar {
+            background-color: transparent;
+            color: black;
+            padding: 30px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin: 5px 0;
             display: inline-block;
-            width: 100%;
+            width: calc(50% - 10px);
         }
 
-        /* Estilos para los botones de categoría "Hamburguesas" */
         .categoria-btn.hamburguesas {
-            background-color: rgb(0, 149, 149); /* Cambia el color a azul claro */
+            background-color: rgb(0, 149, 149);
         }
 
-        /* Estilos para los botones de categoría que no sean "Hamburguesas" */
         .categoria-btn:not(.hamburguesas) {
             background-color: hsl(122, 39%, 49%);
             color: white;
         }
 
         .cupon-btn {
-            background-color: orange; /* Cambia el color a naranja */
+            background-color: orange;
         }
 
-        .btn-insertar, .btn-pagar {
-            background-color: #D2B48C; /* Cambia el color a café claro */
+        .btn-insertar,
+        .btn-pagar {
+            background-color: #D2B48C;
             color: white;
-            padding: 10px 5px;
+            padding: 30px 5px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin: 5px 0;
-            display: block;
-            width: 100%;
+            display: inline-block;
+            width: calc(50% - 10px);
         }
 
         .texto-pedido {
-            /* Estilos para el recuadro de texto del pedido */
             max-height: 200px;
             overflow-y: auto;
         }
@@ -84,41 +87,53 @@
         }
 
         .opciones-btn {
-            width: 48%;
+            width: 50%;
+        }
+
+        .categorias-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .producto-btn.hamburguesas {
+            margin-right: 10px;
+            background-color: lightblue;
+            /* Agregado color de fondo para los botones */
         }
     </style>
 </head>
+
 <body>
     <div class="contenedor">
         <div class="izquierda">
             <div class="seccion total-subtotal-cambio">
-                <!-- Aquí se irán calculando el Total, Subtotal y Cambio -->
-                Total: $<span id="total">0</span> | Subtotal: $<span id="subtotal">0</span> | Cambio: $<span id="cambio">0</span>
+                Total: $<span id="total">0</span> | Subtotal: $<span id="subtotal">0</span> | Cambio: $<span
+                    id="cambio">0</span>
             </div>
             <div class="seccion seccion-1" contenteditable="true">
                 <div class="texto-pedido" id="pedido">
-                    <!-- Aquí aparecerán los pedidos del cliente -->
                 </div>
             </div>
         </div>
         <div class="derecha">
             <div class="seccion seccion-3">
-                <!-- Botones de categorías -->
-                <button class="categoria-btn hamburguesas" onclick="seleccionarCategoria('Hamburguesas')">Hamburguesas</button>
-                <button class="categoria-btn" onclick="seleccionarCategoria('Bebidas')">Bebidas</button>
-                <button class="categoria-btn" onclick="seleccionarCategoria('Snacks')">Snacks</button>
-                <button class="categoria-btn" onclick="seleccionarCategoria('Combos')">Combos</button>
+                <div class="categorias-container">
+                    <button class="categoria-btn hamburguesas"
+                        onclick="seleccionarCategoria('Hamburguesas')">Hamburguesas</button>
+                    <button class="categoria-btn" onclick="seleccionarCategoria('Bebidas')">Bebidas</button>
+                </div>
+                <div class="categorias-container">
+                    <button class="categoria-btn" onclick="seleccionarCategoria('Snacks')">Snacks</button>
+                    <button class="categoria-btn" onclick="seleccionarCategoria('Combos')">Combos</button>
+                </div>
             </div>
             <div class="seccion seccion-4">
-                <!-- Botones específicos de categoría -->
-                <!-- Botones de productos -->
             </div>
             <div class="seccion seccion-5">
-                <!-- Botón de "Cupones promoción" -->
                 <button class="cupon-btn">Cupones Promoción</button>
             </div>
             <div class="seccion botones">
-                <!-- Botones en la parte inferior derecha -->
                 <button class="btn-insertar" onclick="agregarArticulo()">Agregar Artículo</button>
                 <button class="btn-pagar">Pagar ahora</button>
             </div>
@@ -126,16 +141,14 @@
     </div>
 
     <script>
-        let ordenActual = ''; // Variable para mantener el estado actual de la orden
-        let total = 0; // Variable para mantener el total de la orden
-        let subtotal = 0; // Variable para mantener el subtotal de la orden
+        let ordenActual = '';
+        let total = 0;
+        let subtotal = 0;
 
         function seleccionarCategoria(categoria) {
-            // Limpiar la sección de botones específicos
             const botonesEspecificos = document.querySelector('.seccion-4');
             botonesEspecificos.innerHTML = '';
 
-            // Mostrar los botones específicos según la categoría
             if (categoria === "Hamburguesas") {
                 const botonesHamburguesas = ["Carne", "Doble", "Jr. Carne", "Jr. Pollo", "Vegetariana"];
                 botonesHamburguesas.forEach((boton) => {
@@ -151,10 +164,8 @@
         }
 
         function seleccionarProducto(producto) {
-            // Actualizar el estado actual de la orden con el producto seleccionado
             ordenActual = `1x Hamburguesas de ${producto}`;
 
-            // Cambiar el color del botón seleccionado a azul
             const botonesProductos = document.querySelectorAll('.producto-btn');
             botonesProductos.forEach((btn) => {
                 btn.classList.remove('producto-seleccionado');
@@ -165,7 +176,6 @@
                 botonSeleccionado.classList.add('producto-seleccionado');
             }
 
-            // Agregar lógica para cambiar los botones según el producto seleccionado
             const botonesEspecificos = document.querySelector('.seccion-4');
             botonesEspecificos.innerHTML = '';
 
@@ -182,10 +192,8 @@
         }
 
         function seleccionarTipo(tipo) {
-            // Actualizar el estado actual de la orden con el tipo seleccionado
             ordenActual += ` ${tipo}`;
 
-            // Cambiar el color del botón seleccionado a azul
             const botonesTipos = document.querySelectorAll('.producto-btn');
             botonesTipos.forEach((btn) => {
                 btn.classList.remove('producto-seleccionado');
@@ -196,7 +204,6 @@
                 botonSeleccionado.classList.add('producto-seleccionado');
             }
 
-            // Agregar lógica para cambiar los botones según el tipo seleccionado
             const botonesEspecificos = document.querySelector('.seccion-4');
             botonesEspecificos.innerHTML = '';
 
@@ -213,10 +220,8 @@
         }
 
         function seleccionarOpcion(opcion) {
-            // Actualizar el estado actual de la orden con la opción seleccionada
             ordenActual += ` en ${opcion}`;
 
-            // Cambiar el color del botón seleccionado a azul
             const botonesOpciones = document.querySelectorAll('.producto-btn');
             botonesOpciones.forEach((btn) => {
                 btn.classList.remove('producto-seleccionado');
@@ -227,22 +232,16 @@
                 botonSeleccionado.classList.add('producto-seleccionado');
             }
 
-            // Agregar lógica para otras acciones si es necesario
-
-            // Mostrar la orden actual en la sección-1
             const seccionPedido = document.querySelector('#pedido');
             seccionPedido.innerHTML += `<p>${ordenActual}</p>`;
 
-            // Calcular el Total (simplemente sumando 1 por ahora)
             subtotal += 1;
-            total = subtotal; // En este ejemplo, total es igual al subtotal
-            // Actualizar el total y subtotal en la sección correspondiente
+            total = subtotal;
             const totalElement = document.querySelector('#total');
             const subtotalElement = document.querySelector('#subtotal');
             totalElement.textContent = total;
             subtotalElement.textContent = subtotal;
 
-            // Limpiar la variable de ordenActual para permitir agregar nuevos artículos
             ordenActual = '';
         }
 
@@ -252,4 +251,5 @@
         }
     </script>
 </body>
+
 </html>

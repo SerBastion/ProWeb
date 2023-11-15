@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Peticion</title>
 </head>
-
 <body>
-    <form>
-        <button id="btn_peticion">Peticion</button>
-
+    <form action="">
+        <button id="btnPeticion" type="button">Realizar peticion</button>
     </form>
     <script>
-        document.getElementById("btn_peticion").addEventListener("click", async () => {
-
-            let response = await fetch("http://localhost:8082/", { method: "GET" })
-            let data = await response.text();
-            console.log(data);
-
+        document.querySelector('#btnPeticion').addEventListener('click', async () => {
+            let response = await fetch ('http://localhost:8082', {
+                method: 'GET'
+            })
+            let data = await response.text()
+            console.log(data)
         })
     </script>
-
 </body>
-
 </html>
