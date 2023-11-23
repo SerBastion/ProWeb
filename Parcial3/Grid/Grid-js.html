@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="wrapper"></div>
+ 
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script>
+        new gridjs.Grid({
+          columns: ['NUM_CONTROL', 'APELLIDO_PATERNO', 'APELLIDO_MATERNO', 'NOMBRE', 'FECHA_NACIMIENTO'],
+          server: {
+              url: 'http://localhost:8082/estudiante',
+              then: data => data.map(alumno =>
+              [alumno.ALUMNO_ID, alumno.NOMBRE , alumno.APELLIDO, alumno.EDAD, alumno.FECHA]
+              )
+          }
+          }).render(document.getElementById("wrapper"));
+      </script>
+  </body>
+</html>

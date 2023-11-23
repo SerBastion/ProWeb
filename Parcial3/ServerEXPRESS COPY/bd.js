@@ -13,17 +13,17 @@ const connection = mysql2.createConnection({
     database: 'ejemplobd'
 })
 
-app.get('/EMPLEADO',(req,res)=>{//consulta en el diagonal el nombre de la tabla
+app.get('/ESTUDIANTE',(req,res)=>{//consulta en el diagonal el nombre de la tabla
     
-    console.log(req.query.EMPLEADOID);
+    console.log(req.query.NUM_CONTROL);
 
     let consulta=''
 
-    if(typeof(req.query.EMPLEADOID)=='undefined'){
-        consulta = `SELECT * FROM EMPLEADO`;
+    if(typeof(req.query.NUM_CONTROL)=='undefined'){
+        consulta = `SELECT * FROM ESTUDIANTE`;
     }
     else{
-        consulta = `SELECT * FROM empleado WHERE EMPLEADOID = ${req.query.EMPLEADOID}`;
+        consulta = `SELECT * FROM ESTUDIANTE WHERE NUM_CONTROL = ${req.query.NUM_CONTROL}`;
     }
 
     console.log(consulta)
@@ -32,7 +32,7 @@ app.get('/EMPLEADO',(req,res)=>{//consulta en el diagonal el nombre de la tabla
         consulta,
         function(err, results, fields) {
             if(results.length==0){
-                res.json({ mensaje:"EMPLEADOID no existe"});
+                res.json({ mensaje:"NUM_CONTROL no existe"});
             } 
             else {
                 res.json(results);
