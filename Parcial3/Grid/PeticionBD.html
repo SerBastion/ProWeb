@@ -1,0 +1,73 @@
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Formulario</title>
+        </head>
+
+        <body>
+
+            <div class="container mt-5 bg-light">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <form>
+                            <label for="NUM_CONTROL">Número de control:</label>
+                            <input type="number" class="form-control" id="NUM_CONTROL" name="NUM_CONTROL"
+                                placeholder="Ingrese su número de control"><br></br>
+
+                            <label for="APELLIDO_PATERNO">Apellido paterno:</label>
+                            <input type="text" id="APELLIDO_PATERNO" name="APELLIDO_PATERNO" required><br><br>
+
+                            <label for="APELLIDO_MATERNO">Apellido materno:</label>
+                            <input type="text" id="APELLIDO_MATERNO" name="APELLIDO_MATERNO" required><br><br>
+
+                            <label for="NOMBRE">Nombre:</label>
+                            <input type="text" id="NOMBRE" name="NOMBRE" required><br><br>
+
+                            <label for="FECHA_NACIMIENTO">Fecha de nacimiento:</label>
+                            <input type="date" id="FECHA_NACIMIENTO" name="FECHA_NACIMIENTO" required><br><br>
+
+                            <button type="button" id="btnConsultar">Consultar</button>
+                            <button type="button" class="btn btn-dark" id="btn_eliminar">ELIMINAR</button>
+                        </form>
+                        <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+                        <script>
+                            document.getElementById("btnConsultar").addEventListener("click", async () => {
+                                let id = prompt("número de control");
+
+                                let response = await fetch(`http://localhost:8082/estudiante?NUM_CONTROL=${id}`, { method: "GET" });
+
+                                let data = await response.json();
+
+                                console.log(data)
+
+
+                                if (data.status == 0) {
+                                    alert(data.mensaje);
+                                    console.log(data.status);
+                                } else {
+                                    alert(data.mensaje)
+                                    console.log(data.datos);
+                                    console.log(data.status);
+                                    
+                                    document.getElementById("NUM_CONTROL").value = data.datos.NUM_CONTROL;
+                                    document.getElementById("APELLIDO_PATERNO").value = data.datos.APELLIDO_PATERNO;
+                                    document.getElementById("APELLIDO_MATERNO").value = data.datos.APELLIDO_MATERNO;
+                                    document.getElementById("NOMBRE").value = data.datos.NOMBRE;
+                                    document.getElementById("FECHA_NACIMIENTO").value = data.datos.FECHA_NACIMIENTO;
+                                }
+
+                            });
+                        </script>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </body>
+
+        </html>

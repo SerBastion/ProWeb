@@ -16,7 +16,7 @@
           server: {
               url: 'http://localhost:8082/estudiante',
               then: data => data.map(alumno =>
-              [alumno.ALUMNO_ID, alumno.NOMBRE , alumno.APELLIDO, alumno.EDAD, alumno.FECHA]
+              [alumno.NUM_CONTROL, alumno.APELLIDO_PATERNO , alumno.APELLIDO_MATERNO, alumno.NOMBRE, alumno.FECHA_NACIMIENTO]
               )
           }
           }).render(document.getElementById("wrapper"));

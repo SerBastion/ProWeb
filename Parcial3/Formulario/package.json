@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bootstrap-table": "^1.22.1",
+    "jspdf": "^2.5.1"
+  }
+}
